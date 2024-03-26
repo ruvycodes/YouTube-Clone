@@ -1,10 +1,19 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toggleHamBurgMenu } from './Utils/appSlice'
 
 const Header = () => {
+
+    let dispatch = useDispatch()
+
+    const handleMenuClick = ()=> {
+        dispatch(toggleHamBurgMenu())
+    }
+
     return (
         <div className='flex justify-between shadow-lg py-1'>
             <div className='flex -my-6 ml-5'>
-                < img className='w-7 cursor-pointer' src="https://www.svgrepo.com/show/421558/burger-menu.svg" alt="" />
+                < img onClick={handleMenuClick} className='w-7 cursor-pointer' src="https://www.svgrepo.com/show/421558/burger-menu.svg" alt="" />
                 <img className='w-40 p-2' src="https://imgs.search.brave.com/DmZxYT5KTuheQO4amNiCpG1yYOEqf1CeuaiEid2P3Vc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/bG9nby53aW5lL2Ev/bG9nby9Zb3VUdWJl/L1lvdVR1YmUtTG9n/by53aW5lLnN2Zw.svg" alt="" />
             </div >
 
