@@ -4,8 +4,7 @@ import './App.css'
 import Header from './Header'
 import SideBar from './SideBar'
 import appStore from './Utils/appStore'
-import VideoContainer from './VideoContainer'
-import TagList from './TagList'
+import { Outlet } from 'react-router-dom'
 
 function App() {
 
@@ -13,10 +12,9 @@ function App() {
     <>
       <Provider store={appStore}>
         <Header />
-        <TagList />
         <div className='flex'>
           <SideBar />
-          <VideoContainer />
+          <Outlet />
         </div>
       </Provider>
     </>

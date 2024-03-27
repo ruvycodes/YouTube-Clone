@@ -1,13 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-const VideoCard = () => {
+const VideoCard = ({ items }) => {
+
+    const { snippet, statistics } = items;
+    const { thumbnails, channelTitle, title } = snippet
+
     return (
-        <div className='mx-8 py-2 my-2'>
-            <img className='w-[15rem]' src="https://i.ytimg.com/vi/7JDeBPuFQS0/sddefault.jpg" alt="" />
-            <div className='flex flex-col'>
-                <span className='w-64 py-2'>"Watch: Baltimore Bridge Collapses After It Was Hit by Ship | WSJ News"</span>
-                <span>WSJ News</span>
-                <span>599641</span>
+        <div className='ml-5 py-2 my-2 bg-slate-200 rounded-lg'>
+            <Link to={"watch/" + items.id}><img className='w-[19rem] p-2' src={thumbnails?.standard?.url} alt="thumbnail" /></Link>
+            <div className='flex flex-col p-2'>
+                <span className='w-64 py-2 font-bold'>{title}</span>
+                <span>{channelTitle}</span>
+                <span>{statistics?.viewCount}</span>
             </div>
         </div>
     )
