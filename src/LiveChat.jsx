@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addMessages } from './Utils/liveChatSlice';
+import { addMessages, removeMessages } from './Utils/liveChatSlice';
 import { generateRandomComments, generateRandomNames } from './Utils/helper';
-import { USER_PROFILE } from './Utils/constants';
+import { LIVE_CHAT_LIMIT, USER_PROFILE } from './Utils/constants';
 
 const LiveChat = () => {
 
@@ -11,19 +11,23 @@ const LiveChat = () => {
 
     useEffect(()=> {
       let i = setInterval(()=> {
-        //API POLLING
+        //SIMULATED API POLLING 
+        //We have used our own coded functions for comments and names but api polling is used here in case of youtube or some other similar app , it will dispatch an action everytime after the specified interval
         dispatch(addMessages( {
           name : generateRandomNames(),
           messages: generateRandomComments()
         }    
         ))
       } , 2000)
-
-      return ()=>clearInterval(i)
+      
+      return ()=>clearInterval(i) //clear interval after component dismounts
 
     } , [])
 
-
+    //Remove the element from 0th index (top of chatbox) after the limit is exceeded , we can also use LRU cache in this
+    if(chatMessageArray.length>LIVE_CHAT_LIMIT) {
+      dispatch(removeMessages())
+    }
 
   return ( 
 

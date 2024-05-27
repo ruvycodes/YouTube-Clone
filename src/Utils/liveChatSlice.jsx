@@ -8,10 +8,15 @@ const liveChatSlice = createSlice({
 
     reducers : {
         addMessages: (state , action) => {
-            state.messages.unshift(action.payload)
+            state.messages.push(action.payload)
+        },
+
+        //remove message after a certain limit
+        removeMessages: (state) => {
+            state.messages.splice(0,1)
         }
     }
 })
 
-export const {addMessages} = liveChatSlice.actions;
+export const {addMessages , removeMessages} = liveChatSlice.actions;
 export default liveChatSlice.reducer;
